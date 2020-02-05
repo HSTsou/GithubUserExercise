@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">GitHubExercise</string>
+    <string name="home">首頁</string>
+    <string name="me">個人</string>
+</resources>
