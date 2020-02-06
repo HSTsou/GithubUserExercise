@@ -2,7 +2,6 @@ package com.hs.githubexercise
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.hs.githubexercise.ui.ProfileFragment
 import com.hs.githubexercise.ui.UserFragment
@@ -34,14 +33,14 @@ class MainActivity : AppCompatActivity() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.action_area_list -> {
+                R.id.action_user -> {
                     supportFragmentManager.beginTransaction()
                         .hide(profileFragment)
                         .show(userFragment)
                         .commit()
 
                 }
-                R.id.action_favorites -> {
+                R.id.action_profile -> {
                     supportFragmentManager.beginTransaction()
                         .hide(userFragment)
                         .show(profileFragment)

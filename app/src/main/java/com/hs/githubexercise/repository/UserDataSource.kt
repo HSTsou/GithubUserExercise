@@ -56,7 +56,7 @@ class UserDataSource : PageKeyedDataSource<String, User>(), KoinComponent {
     }
 
     private fun parseNextPageUrl(headers: Headers): String? {
-        val link: String = headers.get("Link") ?: return null
+        val link: String = headers["Link"] ?: return null
         val result = link.split(";")
         return result[0].replace("<", "").replace(">", "")
     }

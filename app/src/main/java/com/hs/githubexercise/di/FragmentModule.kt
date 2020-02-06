@@ -1,4 +1,4 @@
-package com.hs.githubexercise.di;
+package com.hs.githubexercise.di
 
 import com.hs.githubexercise.ui.ProfileFragment
 import com.hs.githubexercise.ui.UserFragment
