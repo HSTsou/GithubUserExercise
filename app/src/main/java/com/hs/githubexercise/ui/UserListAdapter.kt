@@ -5,15 +5,25 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.hs.githubexercise.R
 import com.hs.githubexercise.entity.User
 
 
-class UserListAdapter : RecyclerView.Adapter<UserViewHolder>() {
+class UserListAdapter : PagedListAdapter<User, UserViewHolder>(UserDiffUtils) {
 
-    var list: List<User>? = null
+    companion object UserDiffUtils : DiffUtil.ItemCallback<User>() {
+        override fun areItemsTheSame(oldItem: User, newItem: User): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: User, newItem: User): Boolean {
+            return oldItem == newItem
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val view: View =
@@ -22,41 +32,27 @@ class UserListAdapter : RecyclerView.Adapter<UserViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        if (list == null) {
-            return
-        }
-        val area: User = list!![position]
-        holder.bind(area)
-    }
 
-    override fun getItemCount(): Int {
-        if (list == null) {
-            return 0
-        }
-        return list!!.size
-    }
-
-    fun updateAreas(areas: List<User>) {
-        list = areas
-        notifyDataSetChanged()
+        val user: User = getItem(position) ?: return
+        holder.bind(user!!)
     }
 }
 
 class UserViewHolder(view: View) :
     RecyclerView.ViewHolder(view) {
-    private var mTitleView: TextView? = null
-    private var mImageView: ImageView? = null
+    private var titleView: TextView? = null
+    private var imageView: ImageView? = null
 
     init {
-        mTitleView = view.findViewById(R.id.list_name)
-        mImageView = view.findViewById(R.id.pic)
+        titleView = view.findViewById(R.id.list_name)
+        imageView = view.findViewById(R.id.pic)
 
     }
 
     fun bind(user: User) {
-        mTitleView?.text = user.login
+        titleView?.text = user.login
 
-        mImageView?.let {
+        imageView?.let {
             Glide.with(itemView)
                 .load(user.avatarUrl)
                 .circleCrop()

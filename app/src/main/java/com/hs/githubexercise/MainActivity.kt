@@ -32,12 +32,12 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.action_area_list -> {
                     val frag = userFragment
-                    replaceFragment(frag, "AreaListFragment")
+                    replaceFragment(frag, "home")
 
                 }
                 R.id.action_favorites -> {
                     val frag = userFragment
-                    replaceFragment(frag, "FavAreaFragment")
+                    replaceFragment(frag, "me")
 
                 }
             }

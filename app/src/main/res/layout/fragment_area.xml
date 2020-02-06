@@ -1,33 +1,33 @@
-<?xml version="1.0" encoding="utf-8"?><!--<layout xmlns:android="http://schemas.android.com/apk/res/android">-->
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-<!--    <data>-->
+    <data>
+        <import type="android.view.View" />
 
-<!--        <import type="android.view.View" />-->
+        <variable
+            name="showLoading"
+            type="boolean" />
 
-<!--        <variable-->
-<!--            name="showLoading"-->
-<!--            type="boolean" />-->
+    </data>
 
-<!--    </data>-->
-
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <!--        <ProgressBar-->
-    <!--            android:id="@+id/progress"-->
-    <!--            style="@style/Widget.AppCompat.TextView.SpinnerItem"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_centerInParent="true"-->
-    <!--            android:visibility="@{showLoading? View.VISIBLE: View.GONE}" />-->
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/area_list_recycler_view"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </androidx.recyclerview.widget.RecyclerView>
-</RelativeLayout>
+        <ProgressBar
+            android:id="@+id/progress"
+            style="@style/Widget.AppCompat.TextView.SpinnerItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="@{showLoading? View.VISIBLE: View.GONE}" />
 
-    <!--</layout>-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/area_list_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </RelativeLayout>
+
+</layout>

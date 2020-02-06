@@ -1,6 +1,7 @@
 package com.hs.githubexercise.entity
 
 
+import androidx.recyclerview.widget.DiffUtil
 import com.google.gson.annotations.SerializedName
 
 data class User(
