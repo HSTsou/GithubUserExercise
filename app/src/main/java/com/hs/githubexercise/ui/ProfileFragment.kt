@@ -10,8 +10,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
-import com.hs.githubexercise.Constants
 import com.hs.githubexercise.R
+import com.hs.githubexercise.databinding.FragmentProfileBinding
 import com.hs.githubexercise.entity.User
 import com.hs.githubexercise.viewModel.ProfileViewModel
 import kotlinx.android.synthetic.main.fragment_profile.*
@@ -20,6 +20,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class ProfileFragment : Fragment() {
     private val profileViewModel: ProfileViewModel by viewModel()
+    lateinit var binding: FragmentProfileBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,10 +28,13 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        return inflater.inflate(
+        val view: View = inflater.inflate(
             R.layout.fragment_profile, container,
             false
         )
+
+        binding = FragmentProfileBinding.bind(view)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -51,8 +55,7 @@ class ProfileFragment : Fragment() {
 
         })
         profileViewModel.isLoading.observe(this, Observer<Boolean> { isLoading ->
-            Log.i(Constants.LOG_TAG, "users observe isLoading $isLoading")
-//            binding.showLoading = isLoading
+            binding.showLoading = isLoading
         })
         profileViewModel.getProfileUser("HsTsou")
     }
