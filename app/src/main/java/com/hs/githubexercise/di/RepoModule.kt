@@ -8,7 +8,6 @@ import org.koin.dsl.module
 val repoModule = module {
     single<UserRepo> {
         UserRepoImpl(
-            get()
         )
     }
 }

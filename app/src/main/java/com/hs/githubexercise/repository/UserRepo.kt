@@ -18,18 +18,14 @@ interface UserRepo {
     fun getUsers(): Observable<PagedList<User>>
 }
 
-class UserRepoImpl(private val api: UserRequest) : UserRepo {
+class UserRepoImpl : UserRepo {
     @SuppressLint("CheckResult")
     override fun getUsers(): Observable<PagedList<User>> {
-        Log.i(Constants.LOG_TAG, "getUsers ")
-//        return api
-//            .getUser(0)
         val dataSource = UserPagingDataSourceFactory()
         val pagedListConfig = PagedList.Config.Builder()
-            .setPageSize(9)
+            .setPageSize(10)
             .setPrefetchDistance(4)
             .build()
-
 
         return RxPagedListBuilder(dataSource, pagedListConfig)
             .setFetchScheduler(Schedulers.io())

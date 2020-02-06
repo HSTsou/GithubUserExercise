@@ -32,9 +32,9 @@ class UserViewModel(private val repo: UserRepo) : ViewModel(), KoinComponent {
     }
 
     fun getUser() {
+        onLoading()
         val dis = repo.getUsers()
             .subscribeOn(Schedulers.io())
-//            .doOnEvent { _, _ -> onLoading() }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ userResponse ->
                 Log.i(Constants.LOG_TAG, "userResponse @VM $userResponse")

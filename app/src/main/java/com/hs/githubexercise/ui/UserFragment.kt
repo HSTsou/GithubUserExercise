@@ -5,17 +5,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
+import androidx.databinding.DataBindingUtil
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hs.githubexercise.Constants
 
 import com.hs.githubexercise.R
-import com.hs.githubexercise.databinding.FragmentAreaBinding
+import com.hs.githubexercise.databinding.FragmentUserBinding
 import com.hs.githubexercise.entity.User
 import com.hs.githubexercise.viewModel.UserViewModel
 
@@ -28,7 +29,7 @@ class UserFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: UserListAdapter
 
-    lateinit var binding: FragmentAreaBinding
+    lateinit var binding: FragmentUserBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,10 +37,8 @@ class UserFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentAreaBinding.inflate(inflater)
-
         val view: View = inflater.inflate(
-            R.layout.fragment_area, container,
+            R.layout.fragment_user, container,
             false
         )
 
@@ -48,17 +47,15 @@ class UserFragment : Fragment() {
         recyclerView.setHasFixedSize(true)
         adapter = UserListAdapter()
         recyclerView.adapter = adapter
-        return view
+
+        binding = FragmentUserBinding.bind(view)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         userViewModel.getUsers().observe(this, Observer<PagedList<User>> { users ->
-            Log.i(Constants.LOG_TAG, "fragment users observe $users")
-//            adapter.updateUsers(users)
-//            users.
-
             adapter.submitList(users)
 
         })
